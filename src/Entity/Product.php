@@ -26,6 +26,12 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $categorie = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $picture = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $rate = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +81,30 @@ class Product
     public function setCategorie(?Category $categorie): static
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getRate(): ?float
+    {
+        return $this->rate;
+    }
+
+    public function setRate(?float $rate): static
+    {
+        $this->rate = $rate;
 
         return $this;
     }
