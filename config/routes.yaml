@@ -1,3 +1,12 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+#Authentification
+
+app_login:
+    path: /login
+    controller: App\Controller\AuthenticationController::login
+
+app_register:
+    path: /register
+    controller: App\Controller\AuthenticationController::register
