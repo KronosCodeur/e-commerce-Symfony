@@ -5,6 +5,9 @@
 {% block body %}
 <h1>Connexion</h1>
 <form action="{{ path('login') }}" method="post">
+    {% if (error !=null) %}
+    <h3 class="bg-red-700 text-white">{{ error }}</h3>
+    {% endif %}
     <label>
         <input type="email"  name="email" placeholder="Email">
     </label>
