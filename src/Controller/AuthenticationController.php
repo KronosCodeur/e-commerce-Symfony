@@ -20,7 +20,7 @@ class AuthenticationController extends AbstractController
         return  $this->render('authentication/register.html.twig');
     }
 
-    #[Route("/user/login",name: "userlogin",methods: ['POST'])]
+    #[Route("/user/login",name: "userLogin",methods: ['POST'])]
     public function login(Request $request,UserRepository $userRepository)
     {
         $email = $request->get('email');
