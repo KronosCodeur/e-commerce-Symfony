@@ -31,9 +31,7 @@ class AuthenticationController extends AbstractController
                 "user"=>$user
             ]);
         }else{
-            return $this->render('authentication/login.html.twig',[
-                "error"=>"invalid credentials"
-            ]);
+            return $this->redirect('/login',302);
         }
     }
 }

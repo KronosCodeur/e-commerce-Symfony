@@ -20,16 +20,6 @@ class CategoryController extends AbstractController
         $this->categoryRepository = $categoryRepository;
     }
 
-    #[Route('/category', name: 'app_category')]
-    public function index(): Response
-    {
-        $categories = $this->categoryRepository->findAll();
-        return $this->render('category/index.html.twig', [
-            'controller_name' => 'CategoryController',
-            'categories'=>$categories
-        ]);
-    }
-
     private CategoryRepository $categoryRepository;
     #[Route('/api/category/createCategory',name:'createCategory',methods: ['POST'])]
     public function createCategory(Request $request,EntityManagerInterface $entityManager)

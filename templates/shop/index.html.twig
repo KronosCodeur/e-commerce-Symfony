@@ -1,20 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ShopController!{% endblock %}
+{% block title %}Boutique{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Kronos Codeur/PhpstormProjects/e-commerce-Symfony/src/Controller/ShopController.php'|file_link(0) }}">src/Controller/ShopController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Kronos Codeur/PhpstormProjects/e-commerce-Symfony/templates/shop/index.html.twig'|file_link(0) }}">templates/shop/index.html.twig</a></code></li>
-    </ul>
+<div class="my-3 p-5">
+    <h1 class="text-gray-900 text-4xl mb-20">Boutiques</h1>
+    <div class="my-5 space-x-3 flex flex-row justify-center content-center">
+        {% for category in categories %}
+            <div class="bg-gray-800 w-[230px] p-3 h-[230px] shadow-amber-200 shadow-2xl rounded-3xl text-center flex flex-col content-center justify-center">
+                <h2 class="text-center text-white my-3 font-bold uppercase text-2xl">{{ category.name }}</h2>
+                <h2 class="text-center text-white my-1 font-light">{{ category.description }}</h2>
+                <h2 class="text-center text-amber-400 text-4xl">{{ category.products.count }}</h2>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="rounded-lg shadow-lg mt-20 mb-5 flex flex-row">
+        <div class="lg:w-3/5 w-full bg-gradient-to-r from-black to-purple-900 lg:from-black lg:via-purple-900 lg:to-transparent rounded-lg text-gray-100 p-12">
+            <div class="lg:w-1/2">
+                <h3 class="text-2xl font-extrabold mb-4">Abonnez vous pour avoir nos offres en premier</h3>
+                <p class="mb-4 leading-relaxed">Nous partongeons toutes nos nouvelles promotions dans la newsletter  enregister vous pour toujours etre au parfum des informations</p>
+                <div>
+                    <input type="email" placeholder="Enter email address" class="bg-gray-600 text-gray-200 placeholder-gray-400 px-4 py-3 w-full rounded-lg focus:outline-none mb-4" />
+                    <button type="submit" class="bg-red-600 py-3 rounded-lg w-full">Abonnement</button>
+                </div>
+            </div>
+        </div>
+        <div class="lg:w-2/5 w-full lg:flex lg:flex-row hidden">
+            <img src="./images/subscribe-banner.png" class="h-96" />
+        </div>
+    </div>
 </div>
 {% endblock %}

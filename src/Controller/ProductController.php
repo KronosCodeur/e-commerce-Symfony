@@ -13,26 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
-    /**
-     * @param ProductRepository $productRepository
-     */
-    public function __construct(ProductRepository $productRepository)
-    {
-        $this->productRepository = $productRepository;
-    }
-
-    #[Route('/product', name: 'app_product')]
-    public function index(): Response
-    {
-        $products = $this->productRepository->findAll();
-        return $this->render('product/index.html.twig', [
-            'controller_name' => 'ProductController',
-            'products'=>$products
-        ]);
-    }
-
-    private  ProductRepository $productRepository;
-
     #[Route('/api/product/createProduct',name:'createProduct',methods: ['POST'])]
     public function createProduct(Request $request,EntityManagerInterface $entityManager, CategoryRepository $categoryRepository)
     {
