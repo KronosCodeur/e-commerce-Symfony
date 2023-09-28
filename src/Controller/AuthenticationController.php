@@ -14,24 +14,25 @@ class AuthenticationController extends AbstractController
     public function appLogin(): Response{
         return $this-> render('authentication/login.html.twig');
     }
-    #[Route('/login', name: 'app_register')]
+    #[Route('/register', name: 'app_register')]
     public function appRegister(): Response
     {
         return  $this->render('authentication/register.html.twig');
     }
 
-    #[Route("/user/login",name: "login",methods: ['POST'])]
+    #[Route("/user/login",name: "userlogin",methods: ['POST'])]
     public function login(Request $request,UserRepository $userRepository)
     {
         $email = $request->get('email');
         $password = $request->get('password');
         $user=$userRepository->findBy(['email'=>$email,'password'=>$password]);
         if ($user!=null){
-            return $this->render('home/index.html.twig',[
-                "user"=>$user
+            return $this->redirectToRoute('app_home',[
+                'data' => $user,
             ]);
         }else{
-            return $this->redirect('/login',302);
+            $this->addFlash('error', 'invalid credentials');
+            return $this->redirectToRoute('app_login');
         }
     }
 }
