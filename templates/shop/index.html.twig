@@ -4,18 +4,20 @@
 
 {% block body %}
 <div class="my-3 p-5">
-    <h1 class="text-gray-900 text-4xl mb-20">Boutiques</h1>
+    <h1 class="text-2xl font-extrabold mb-4">Bienvenu dans notre espace boutique n'hesiter pas
+        à parcourir toutes les boutiques </h1>
     <div class="my-5 space-x-3 flex flex-row justify-center content-center">
         {% for category in categories %}
-            <div class="bg-gray-800 w-[230px] p-3 h-[230px] shadow-amber-200 shadow-2xl rounded-3xl text-center flex flex-col content-center justify-center">
+            <a class="bg-gray-800 w-[230px] p-3 h-[230px] shadow-amber-200 shadow-2xl rounded-3xl text-center flex flex-col content-center justify-center" href="/">
                 <h2 class="text-center text-white my-3 font-bold uppercase text-2xl">{{ category.name }}</h2>
                 <h2 class="text-center text-white my-1 font-light">{{ category.description }}</h2>
                 <h2 class="text-center text-amber-400 text-4xl">{{ category.products.count }}</h2>
-            </div>
+
+            </a>
         {% endfor %}
     </div>
 <div>
-    <p class="text-2xl font-extrabold mb-4">
+    <p class="text-xl font-extrabold mb-4">
         Devenez un fournisseur en creant votre boutique sur la plateforme essalah Market <a href="{{ path('app_addboutique') }}" class="font-medium text-primary-600 hover:underline  text-purple-600">cliquez ici</a>
 
     </p>

@@ -35,5 +35,44 @@ class AuthenticationController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
+
+
+    #[Route("/user/register", name: "userRegister", methods: ['POST'])]
+    public function register(
+        Request $request,
+        UserRepository $userRepository,
+        EntityManagerInterface $entityManager,
+        UserPasswordEncoderInterface $passwordEncoder
+    ): Response {
+        $email = $request->request->get('email');
+        $password = $request->request->get('password');
+        $nom = $request->request->get('nom');
+        $prenom = $request->request->get('prenom');
+
+        // Vérifiez si un utilisateur avec cet e-mail existe déjà
+        $existingUser = $userRepository->findOneBy(['email' => $email]);
+
+        if ($existingUser !== null) {
+            $this->addFlash('error', 'User with this email already exists.');
+            return $this->redirectToRoute('app_register');
+        }
+
+        // Créez un nouvel utilisateur
+        $user = new User();
+        $user->setEmail($email);
+        $user->setNom($nom);
+        $user->setPrenom($prenom);
+
+        // Encodez le mot de passe avant de le stocker
+        $encodedPassword = $passwordEncoder->encodePassword($user, $password);
+        $user->setPassword($encodedPassword);
+
+        // Enregistrez l'utilisateur dans la base de données
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_home', ['data' => $user]);
+    }
+
 }
 
